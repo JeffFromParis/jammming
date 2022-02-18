@@ -1,15 +1,22 @@
 import React from 'react';
 import './TrackList.css';
+import Track from '../Track/Track';
 
 class TrackList extends React.Component{
     render(){
-        return(
+        
+        //for debug purposes
+        this.props.tracks.map(track => {
+            return console.log(`Track #${track.id}: ${track.name} from ${track.artist} on ${track.album}.`);
+        });
+
+        return (
             <div className="TrackList">
-                <ul>
-                    <li>Song 1</li>
-                    <li>Song 2</li>
-                    <li>Song 3</li>
-                </ul>
+                {
+                    this.props.tracks.map(track => {
+                        return <Track track={track} key={track.id}/>
+                    })
+                }
             </div>
         );
     }
