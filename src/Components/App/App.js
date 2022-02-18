@@ -8,6 +8,7 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
     this.state = {
       searchResults: [
         {id: 1, name: "Haïti", artist: "Arcade Fire", album: "Funerals"},
@@ -24,8 +25,8 @@ class App extends React.Component{
   }
   
   //add a track to a playslit
-  addTrack(track){
-    
+  // that method is passed to the SearchResult component, then to the tracklist and finally to the track.
+  addTrack(track){    
     let tracks = this.state.playlistTracks;
 
     //check if the track ID is already in the playlist
@@ -38,6 +39,14 @@ class App extends React.Component{
     this.setState({playlistTracks: tracks});
   }
 
+  //remove a track from a playlist
+  // that method is passed to the Playlist component, then to the tracklist and finally to the track.
+  removeTrack(track){
+    let tracks = this.state.playlistTracks;
+    tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
+    this.setState({playlistTracks: tracks});
+  }
+
   render(){
     return (
       <div>
@@ -46,7 +55,7 @@ class App extends React.Component{
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
-            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks}/>
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack}/>
           </div>
         </div>
       </div>
