@@ -7,6 +7,7 @@ import Playlist from '../Playlist/Playlist';
 class App extends React.Component{
   constructor(props){
     super(props);
+    this.addTrack = this.addTrack.bind(this);
     this.state = {
       searchResults: [
         {id: 1, name: "Haïti", artist: "Arcade Fire", album: "Funerals"},
@@ -15,13 +16,28 @@ class App extends React.Component{
       ],
       playlistName: "Disco Hits",
       playlistTracks: [
-        {id: 1, name: "Spacer", artist: "Sheila", album: "King of the World"},
-        {id: 2, name: "Born To Be Alive", artist: "Patrick Hernandez", album: "Born To Be Alive"},
-        {id: 3, name: "Stayin' Alive", artist: "The Bee Gees", album: "Saturday Night Fever"}
+        {id: 4, name: "Spacer", artist: "Sheila", album: "King of the World"},
+        {id: 5, name: "Born To Be Alive", artist: "Patrick Hernandez", album: "Born To Be Alive"},
+        {id: 6, name: "Stayin' Alive", artist: "The Bee Gees", album: "Saturday Night Fever"}
       ]
     };
   }
   
+  //add a track to a playslit
+  addTrack(track){
+    
+    let tracks = this.state.playlistTracks;
+
+    //check if the track ID is already in the playlist
+    if (tracks.find(savedTrack => savedTrack.id === track.id)) {
+      return;
+    }
+
+    //adding the song to the playlist and updating the state
+    tracks.push(track);
+    this.setState({playlistTracks: tracks});
+  }
+
   render(){
     return (
       <div>
@@ -29,7 +45,7 @@ class App extends React.Component{
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults}/>
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
             <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks}/>
           </div>
         </div>
