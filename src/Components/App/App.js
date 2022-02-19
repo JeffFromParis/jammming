@@ -10,6 +10,7 @@ class App extends React.Component{
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
     this.state = {
       searchResults: [
         {id: 1, name: "Haïti", artist: "Arcade Fire", album: "Funerals"},
@@ -48,8 +49,15 @@ class App extends React.Component{
     this.setState({playlistTracks: tracks});
   }
 
+  //Change the name of a playlist by modifying the input field of the playlist component
   updatePlaylistName(name){
     this.setState({playlistName: name});
+  }
+
+  //save a playlist to a spotify user account
+  savePlaylist(){
+    alert('This method is linked to the button correctly');
+    const trackUris = this.state.playlistTracks.map(track => track.uri);
   }
 
   render(){
@@ -64,7 +72,8 @@ class App extends React.Component{
             playlistName={this.state.playlistName}
             playlistTracks={this.state.playlistTracks}
             onRemove={this.removeTrack}
-            onNameChange={this.updatePlaylistName}/>
+            onNameChange={this.updatePlaylistName}
+            onSave={this.savePlaylist}/>
           </div>
         </div>
       </div>
