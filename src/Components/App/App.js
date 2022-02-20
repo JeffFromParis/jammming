@@ -15,15 +15,15 @@ class App extends React.Component{
     this.search = this.search.bind(this);
     this.state = {
       searchResults: [
-        {id: 1, name: "Haïti", artist: "Arcade Fire", album: "Funerals"},
-        {id: 2, name: "No Surprises", artist: "Radiohead", album: "Ok Computer"},
-        {id: 3, name: "Giorgio By Moroder", artist: "Daft Punk", album: "Random Access Memories"}
+        // {id: 1, name: "Haïti", artist: "Arcade Fire", album: "Funerals"},
+        // {id: 2, name: "No Surprises", artist: "Radiohead", album: "Ok Computer"},
+        // {id: 3, name: "Giorgio By Moroder", artist: "Daft Punk", album: "Random Access Memories"}
       ],
-      playlistName: "Disco Hits",
+      playlistName: "New Playlist",
       playlistTracks: [
-        {id: 4, name: "Spacer", artist: "Sheila", album: "King of the World"},
-        {id: 5, name: "Born To Be Alive", artist: "Patrick Hernandez", album: "Born To Be Alive"},
-        {id: 6, name: "Stayin' Alive", artist: "The Bee Gees", album: "Saturday Night Fever"}
+        // {id: 4, name: "Spacer", artist: "Sheila", album: "King of the World"},
+        // {id: 5, name: "Born To Be Alive", artist: "Patrick Hernandez", album: "Born To Be Alive"},
+        // {id: 6, name: "Stayin' Alive", artist: "The Bee Gees", album: "Saturday Night Fever"}
       ]
     };
   }
@@ -60,6 +60,12 @@ class App extends React.Component{
   savePlaylist(){
     // alert('This method is linked to the button correctly');
     const trackUris = this.state.playlistTracks.map(track => track.uri);
+    Spotify.savePlaylist(this.state.playlistName,trackUris).then(()=>{
+      this.setState({
+        playlistName: 'New Playlist',
+        playlistTracks: []
+      })
+    })
   }
 
   //Hook up Search Bar to Spotify Search
