@@ -53,7 +53,7 @@ class App extends React.Component{
 
   //Change the name of a playlist by modifying the input field of the playlist component
   updatePlaylistName(name){
-    console.log('Playlist name has been modified by user.');
+    // console.log('Playlist name has been modified by user.');
     this.setState({playlistName: name});
   }
 
@@ -62,18 +62,18 @@ class App extends React.Component{
     // alert('This method is linked to the button correctly');
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(this.state.playlistName,trackUris).then(()=>{
-      alert(`the playlist "${this.state.playlistName}" has been added to your spotify account."`);
+      // alert(`the playlist "${this.state.playlistName}" has been added to your spotify account."`);
       this.setState({
         playlistName: "New Playlist",
         playlistTracks: []
       });
-      console.log(`the playlist name has been reset to "${this.state.playlistName}".`);
+      // console.log(`the playlist name has been reset to "${this.state.playlistName}".`);
     })
   }
 
   //Hook up Search Bar to Spotify Search
   search(term){
-    console.log(`Starting spotify search corresponding to the term "${term}".`);
+    // console.log(`Starting spotify search corresponding to the term "${term}".`);
     Spotify.search(term).then(searchResults => {
       this.setState({searchResults: searchResults});
     });
